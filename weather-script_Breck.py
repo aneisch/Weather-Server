@@ -53,7 +53,7 @@ for i in range(len(xml_icons)):
 #Insert %
 for n,i in enumerate(percent):
     if i!='':
-	percent[n]+='%'
+	percent[n]+='% Chance'
 
 # Parse dates
 xml_day_one = dom.getElementsByTagName('start-valid-time')[0].firstChild.nodeValue[0:10]
