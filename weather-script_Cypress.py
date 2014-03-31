@@ -40,6 +40,7 @@ for item in xml_temperatures:
 # Parse icons
 xml_icons = dom.getElementsByTagName('icon-link')
 icons = [None]*4
+percent = [None]*4
 for i in range(len(xml_icons)):
     try:
 	icons[i] = xml_icons[i].firstChild.nodeValue.split('/')[-1].split('.')[0].rstrip('0123456789')
