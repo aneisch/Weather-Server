@@ -44,6 +44,8 @@ icons = [None]*4
 for i in range(len(xml_icons)):
     try:
 	icons[i] = xml_icons[i].firstChild.nodeValue.split('/')[-1].split('.')[0].rstrip('0123456789')
+	#Parse Percentages 
+        percent[i] = xml_icons[i].firstChild.nodeValue.split('/')[-1].split('.')[0].strip('bkn').strip('blizzard').strip('cold').strip('du').strip('few').strip('fg').strip('fu').strip('fzra').strip('hi_shwrs').strip('hot').strip('ip').strip('mix').strip('ovc').strip('ra').strip('raip').strip('rasn').strip('sct').strip('sctfg').strip('scttsra').strip('shra').strip('skc').strip('sn').strip('tsra').strip('wind')    
     except AttributeError:
 	icons = [u'no', u'no', u'no', u'no']
 
@@ -88,6 +90,11 @@ output = output.replace('HIGH_ONE',str(highs[0])).replace('HIGH_TWO',str(highs[1
 output = output.replace('LOW_ONE',str(lows[0])).replace('LOW_TWO',str(lows[1])).replace('LOW_THREE',str(lows[2])).replace('LOW_FOUR',str(lows[3]))
 output = output.replace('DATE_VALPLACE',str(dtnow))
 output = output.replace('CURRENT',str(current))
+
+
+#insert percentages
+output = output.replace('PERCENT_ONE',str(percent[0])).replace('PERCENT_TWO',str(percent[1])).replace('PERCENT_THREE',str(percent[2])).replace('PERCENT_FOUR',str(percent[3]))
+
 
 # Insert days of week
 one_day = datetime.timedelta(days=1)
