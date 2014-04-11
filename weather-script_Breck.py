@@ -15,6 +15,7 @@ import sys
 for line in sys.stdin:
     current = line
 
+
 #
 # Download and parse weather data
 #
@@ -36,12 +37,6 @@ for item in xml_temperatures:
         values = item.getElementsByTagName('value')
         for i in range(len(values)):
             lows[i] = int(values[i].firstChild.nodeValue)
-	    
-#fix high vs current bug
-if highs[0] < current:
-    highs[0] = int(current)
-if lows[0] > current:
-    lows[0] = int(current)
 
 # Parse icons
 xml_icons = dom.getElementsByTagName('icon-link')
