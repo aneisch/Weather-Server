@@ -8,7 +8,6 @@ import urllib2
 from xml.dom import minidom
 import datetime
 import codecs
-
 import sys
 
 #Acquire output from shell for current weather
@@ -65,7 +64,7 @@ day_one = datetime.datetime.strptime(xml_day_one, '%Y-%m-%d')
 #
 
 # Open SVG to process
-output = codecs.open('weather-script-preprocess.svg', 'r', encoding='utf-8').read()
+output = codecs.open('/home/pi/weather_server/weather-script-preprocess.svg', 'r', encoding='utf-8').read()
 now = datetime.datetime.now()
 dtyear=str(now.year)
 dtmonth=str(now.month)
@@ -110,4 +109,4 @@ output = output.replace('DAY_ONE',days_of_week[(day_one + 0*one_day).weekday()])
 #original --> output = output.replace('DAY_THREE',days_of_week[(day_one + 2*one_day).weekday()]).replace('DAY_FOUR',days_of_week[(day_one + 3*one_day).weekday()])
 
 # Write output
-codecs.open('weather-script-output.svg', 'w', encoding='utf-8').write(output)
+codecs.open('/home/pi/weather_server/weather-script-output.svg', 'w', encoding='utf-8').write(output)
