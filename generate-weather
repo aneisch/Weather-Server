@@ -8,8 +8,14 @@ convert ~/weather_server/weather-script-output-new.png -resize 600x800 ~/weather
 pngcrush -c 0 -nofilecheck ~/weather_server/weather-script-output-new.png ~/weather_server/weather-script-csoutput.png
 mv ~/weather_server/weather-script-csoutput.png ~/weather_server/College\ Station.png
 ~/Dropbox-Uploader/dropbox_uploader.sh upload ~/weather_server/College\ Station.png /Public/
+#Radar
+convert ~/weather_server/cs-radar.gif -resize 600x800 ~/weather_server/cs-radar.png
+pngcrush -c 0 -nofilecheck ~/weather_server/cs-radar.png ~/weather_server/cs-radar-output.png
+~/Dropbox-Uploader/dropbox_uploader.sh upload ~/weather_server/cs-radar-output.png /Public/
 rm ~/weather_server/College\ Station.png
 rm ~/weather_server/weather-script-output-new.png
+rm ~/weather_server/cs-radar.png
+rm ~/weather_server/cs-radar-output.png
 
 #Breckenridge
 #80424

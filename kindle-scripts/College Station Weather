@@ -1,0 +1,23 @@
+#!/bin/sh
+
+killall -STOP cvm;
+killall -STOP powerd;
+cd "$(dirname "$0")"
+T=0 
+while :
+	do
+		rm /mnt/us/weather/College.png
+		rm /mnt/us/weather/cs-radar.png
+		if wget http://dl.dropboxusercontent.com/u/6127829/College%20Station.png -O /mnt/us/weather/College.png; then
+			wget http://dl.dropboxusercontent.com/u/6127829/cs-radar-output.png -O /mnt/us/weather/cs-radar.png
+			while T < 60:
+				eips -g /mnt/us/weather/College.png
+				sleep 30
+				eips -g
+				eips -g /mtn/us/weather/cs-radar.png
+				let T += 1
+				done	
+		else
+			eips -g /mnt/us/weather/weather-image-error.png
+		fi;
+	done
