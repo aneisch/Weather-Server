@@ -11,6 +11,7 @@ while :
 		rm /mnt/us/weather/cs-radar.png
 		eips -c
 		if wget http://dl.dropboxusercontent.com/u/6127829/College%20Station.png -O /mnt/us/weather/College.png; then
+			sleep 5
 			wget http://dl.dropboxusercontent.com/u/6127829/CS%20Radar.png -O /mnt/us/weather/cs-radar.png
 			eips -g /mnt/us/weather/College.png
 			sleep 30
@@ -139,6 +140,6 @@ while :
 			eips -g /mnt/us/weather/College.png		
 		else
 			eips -g /mnt/us/weather/weather-image-error.png
-		
+			sleep 30
 		fi;
 	done
