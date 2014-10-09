@@ -9,7 +9,8 @@ from xml.dom import minidom
 import datetime
 import codecs
 import sys
-
+from os.path import expanduser
+home = expanduser("~")
 
 #Acquire output from shell for current weather
 for line in sys.stdin:
@@ -65,7 +66,7 @@ day_one = datetime.datetime.strptime(xml_day_one, '%Y-%m-%d')
 #
 
 # Open SVG to process
-output = codecs.open('/home/pi/weather_server/weather-script-preprocess.svg', 'r', encoding='utf-8').read()
+output = codecs.open(home+'/weather_server/weather-script-preprocess.svg', 'r', encoding='utf-8').read()
 
 now = datetime.datetime.now()
 dtyear=str(now.year)
@@ -85,7 +86,7 @@ if now.hour >= 12:
 if now.hour < 12:
     suffix = " AM"
 
-dtnow=str(dtmonth+'/'+dtday+'/'+dtyear+' '+dthour+':'+dtmin+suffix + ' via Pi')
+dtnow=str(dtmonth+'/'+dtday+'/'+dtyear+' '+dthour+':'+dtmin+suffix + ' via AWS')
 
 
 
@@ -109,4 +110,4 @@ output = output.replace('DAY_ONE',days_of_week[(day_one + 0*one_day).weekday()])
 #original --> output = output.replace('DAY_THREE',days_of_week[(day_one + 2*one_day).weekday()]).replace('DAY_FOUR',days_of_week[(day_one + 3*one_day).weekday()])
 
 # Write output
-codecs.open('/home/pi/weather_server/weather-script-output.svg', 'w', encoding='utf-8').write(output)
+codecs.open(home+'/weather_server/weather-script-output.svg', 'w', encoding='utf-8').write(output)
