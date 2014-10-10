@@ -11,6 +11,8 @@ import codecs
 import sys
 from os.path import expanduser
 home = expanduser("~")
+import socket
+hostname = (socket.gethostname())
 
 #Acquire output from shell for current weather
 for line in sys.stdin:
@@ -87,7 +89,7 @@ if now.hour >= 12:
 if now.hour < 12:
     suffix = " AM"
 
-dtnow=str(dtmonth+'/'+dtday+'/'+dtyear+' '+dthour+':'+dtmin+suffix + ' via AWS')
+dtnow=str(dtmonth+'/'+dtday+'/'+dtyear+' '+dthour+':'+dtmin+suffix + ' via ' + hostname)
 
 
 # Insert icons and temperatures
