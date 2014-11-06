@@ -12,11 +12,13 @@ sudo mv ~/weather_server/breckenridge.png /var/www/weather
 #Snow Stake
 cd ~/weather_server/
 wget http://opensnow.com/webcams/current/607.jpg -O ~/weather_server/607.jpg
-wget http://opensnow.com/webcams/current/613.jpg -O ~/weather_server/613.jpg
+wget http://opensnow.com/webcams/current/613.jpg -O ~/weather_server/612.jpg
+FILEDATE=$(date)
+convert -gravity south 612.jpg -fill black -annotate +0+0 "$FILEDATE" 613.jpg
 convert ~/weather_server/607.jpg -resize 600x400\! ~/weather_server/607sm.jpg
 convert ~/weather_server/613.jpg -resize 600x400\! ~/weather_server/613sm.jpg
-convert -gravity south ~/weather_server/613sm.jpg -pointsize 20 -fill black -annotate +0+10 '5am' ~/weather_server/613ann.jpg
-convert -gravity south ~/weather_server/607sm.jpg -pointsize 20 -fill black -annotate +0+10 'Live' ~/weather_server/607ann.jpg
+convert -gravity south ~/weather_server/613sm.jpg -pointsize 20 -fill black -annotate +0+15 '5am' ~/weather_server/613ann.jpg
+convert -gravity south ~/weather_server/607sm.jpg -pointsize 20 -fill black -annotate +0+15 'Live' ~/weather_server/607ann.jpg
 convert ~/weather_server/607ann.jpg ~/weather_server/613ann.jpg -append ~/weather_server/snow.jpg
 convert ~/weather_server/snow.jpg -resize 600x800 ~/weather_server/snow1.png
 pngcrush -c 0 -nofilecheck ~/weather_server/snow1.png ~/weather_server/snow.png
@@ -29,6 +31,7 @@ rm ~/weather_server/613sm.jpg
 rm ~/weather_server/613.jpg
 rm ~/weather_server/snow1.png
 rm ~/weather_server/snow.jpg
+rm ~/weather_server/612.jpg
 
 #College Station
 #77840
