@@ -1,0 +1,143 @@
+<svg xmlns="http://www.w3.org/2000/svg" height="800" width="600" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink">
+
+
+
+<g font-family="DejaVu Sans">
+<text style="text-anchor:left;" font-size="75px" y="115" x="45">16"</text>
+<text style="text-anchor:left;" font-size="20px" y="110" x="145">new snow</text>
+<text style="text-anchor:right;" font-size="20px" y="110" x="345">currently:</text>
+<text style="text-anchor:right;" font-size="75px" y="115" x="440">28
+F</text>
+<text style="text-anchor:right;" font-size="40px" y="110" x="540"></text>
+<text style="text-anchor:middle;" font-size="80px" y="190" x="300">Powder</text>
+<text style="text-anchor:middle;" font-size="60px" y="185" x="300"></text>
+<text style="text-anchor:middle;" font-size="20px" y="270" x="300">base</text>
+<text style="text-anchor:middle;" font-size="50px" y="245" x="305">55"</text>
+<text style="text-anchor:middle;" font-size="20px" y="365" x="300">acerage</text>
+<text style="text-anchor:middle;" font-size="50px" y="335" x="300">76%</text>
+<text style="text-anchor:middle;" font-size="50px" y="280" x="130">141 / 187</text>
+<text style="text-anchor:middle;" font-size="20px" y="305" x="130">trails</text>
+<text style="text-anchor:middle;" font-size="50px" y="280" x="450">28 / 35</text>
+<text style="text-anchor:middle;" font-size="20px" y="305" x="450">lifts</text>
+<text style="text-anchor:middle;" font-size="60px" y="215" x="300"></text>
+
+
+#Keystone
+<text style="text-anchor:left;" font-size="50px" y="475" x="130">4"</text>
+<text style="text-anchor:middle;" font-size="20px" y="500" x="150">new snow</text>
+<text style="text-anchor:middle;" font-size="50px" y="550" x="150"></text>
+#Long description is next, this is so I can vary the sizes depending on condition. See .py line 320
+<text style="text-anchor:middle;" font-size="32px" y="545" x="150">Packed Powder</text>
+<text style="text-anchor:left;" font-size="40px" y="598" x="125">62%</text>
+<text style="text-anchor:middle;" font-size="20px" y="623" x="150">acerage</text>
+<text style="text-anchor:left;" font-size="40px" y="670" x="80">83 / 135</text>
+<text style="text-anchor:middle;" font-size="20px" y="695" x="150">trails</text>     
+<text style="text-anchor:left;" font-size="40px" y="740" x="90">19 / 20</text>
+<text style="text-anchor:middle;" font-size="20px" y="770" x="150">lifts</text> 
+
+
+#Abasin
+<text style="text-anchor:left;" font-size="50px" y="475" x="430">19"</text>
+<text style="text-anchor:middle;" font-size="20px" y="500" x="450">new snow</text>
+<text style="text-anchor:middle;" font-size="50px" y="550" x="450">Powder</text>
+<text style="text-anchor:middle;" font-size="32px" y="545" x="450"></text>
+<text style="text-anchor:left;" font-size="40px" y="598" x="425">0%</text>
+<text style="text-anchor:middle;" font-size="20px" y="623" x="450">acerage</text>
+<text style="text-anchor:left;" font-size="40px" y="670" x="380">34 / 109</text>
+<text style="text-anchor:middle;" font-size="20px" y="695" x="450">trails</text>     
+<text style="text-anchor:left;" font-size="40px" y="740" x="405">7 / 8</text>
+<text style="text-anchor:middle;" font-size="20px" y="770" x="450">lifts</text> 
+
+
+</g>
+<text style="text-anchor:middle;" font-size="15px" y="785" x="300">12/22/2014 9:05 AM via aneischvps</text>
+
+<path d="m300,447.35,0,321.5,3,0,0-381.5-3,0z"/>
+
+
+#Keystone
+<g transform="translate(98.000000,420) scale(0.045000,-0.04500)"
+fill="#000000" stroke="none">
+<path d="M1138 2127 l-88 -89 0 -219 0 -219 126 0 126 0 -7 -77 c-4 -43 -10
+-97 -14 -121 l-6 -42 -163 163 -162 163 -15 118 c-8 66 -16 121 -18 123 -2 2
+-62 -73 -132 -167 -71 -93 -132 -170 -135 -170 -3 0 -81 61 -175 135 -93 74
+-171 133 -173 131 -5 -6 20 -233 27 -244 10 -14 351 -285 354 -281 34 47 140
+180 147 184 6 4 79 -59 164 -139 l152 -145 59 59 c58 59 78 72 70 48 -2 -7 -6
+-47 -10 -89 l-6 -77 87 -12 c48 -7 89 -8 93 -4 5 5 20 106 35 224 l27 215 92
+93 92 92 -228 0 -227 0 -2 218 -3 217 -87 -88z"/>
+<path d="M1690 1629 c-80 -67 -156 -129 -169 -140 l-23 -19 76 -95 c42 -52 75
+-99 72 -104 -3 -4 -75 -50 -160 -101 -85 -52 -164 -101 -176 -110 l-22 -16 46
+-79 c26 -43 45 -79 43 -81 -2 -2 -39 7 -83 21 -43 14 -82 25 -86 25 -3 0 -18
+-36 -33 -81 -15 -44 -30 -77 -34 -72 -4 4 -20 41 -35 81 -15 39 -31 72 -34 72
+-17 0 -162 -52 -162 -59 0 -3 31 -99 69 -212 l68 -205 -40 -112 c-22 -62 -37
+-115 -34 -118 3 -3 91 33 196 80 105 47 194 86 199 86 4 0 29 -48 57 -108 27
+-59 68 -147 90 -196 l42 -88 42 121 43 122 -88 191 c-49 105 -94 192 -100 195
+-6 2 -58 -16 -115 -41 -57 -25 -106 -43 -110 -38 -10 12 -81 203 -77 208 3 2
+98 -31 211 -73 l207 -76 70 -104 c39 -59 72 -99 75 -91 3 7 25 103 50 212 24
+109 47 201 49 203 3 3 96 -16 208 -41 112 -25 209 -46 215 -46 13 0 -122 203
+-138 209 -6 2 -105 25 -220 51 -137 31 -209 43 -212 36 -2 -6 -14 -59 -28
+-119 -28 -124 -11 -117 -162 -68 l-87 28 191 127 190 127 122 -14 c67 -8 123
+-13 125 -12 2 2 -56 78 -129 170 -111 140 -130 169 -118 179 8 8 84 71 169
+142 l155 129 -95 12 c-169 20 -147 28 -310 -108z"/>
+<path d="M344 1415 c36 -140 92 -407 86 -410 -3 -2 -98 -25 -211 -50 -112 -25
+-208 -47 -212 -48 -4 -1 43 -31 105 -66 l113 -64 210 48 c116 27 211 49 213
+50 2 2 -9 52 -23 113 -14 61 -25 115 -25 120 0 8 220 43 229 36 1 -1 -50 -91
+-115 -198 l-119 -195 -118 -42 c-65 -23 -115 -44 -113 -47 3 -2 90 -44 193
+-93 111 -52 187 -93 185 -100 -2 -7 -41 -93 -87 -192 -47 -99 -83 -182 -81
+-184 2 -2 55 14 117 35 l114 39 97 189 c53 104 96 195 95 202 -1 7 -49 34
+-107 59 -58 25 -106 46 -107 47 -2 2 36 72 83 157 47 85 94 170 105 191 l19
+36 -77 48 c-74 46 -76 48 -50 55 16 4 57 11 92 14 l65 7 -6 87 c-4 47 -9 89
+-13 92 -3 4 -105 -6 -226 -22 l-220 -28 -80 53 c-44 29 -93 61 -109 71 l-29
+19 7 -29z"/>
+</g>
+
+#left
+<line id="svg_2" y2="312" x2="230" y1="312" x1="13" stroke-width="2" stroke="#000000" fill="none"/>
+#right
+<line id="svg_2" y2="312" x2="590" y1="312" x1="365" stroke-width="2" stroke="#000000" fill="none"/>
+#middle
+<line id="svg_2" y2="388" x2="230" y1="311" x1="230" stroke-width="2" stroke="#000000" fill="none"/>
+#updownleft
+<line id="svg_2" y2="387" x2="365" y1="387" x1="230" stroke-width="2" stroke="#000000" fill="none"/>
+#updownright
+<line id="svg_2" y2="388" x2="365" y1="311" x1="365" stroke-width="2" stroke="#000000" fill="none"/>
+
+
+
+#Abasin
+<g transform="translate(390.000000,435.000000) scale(0.02500,-0.02500)"
+fill="#000000" stroke="none">
+<path d="M2594 4440 c-515 -634 -872 -1076 -938 -1160 -43 -56 -81 -99 -84
+-95 -4 3 -9 160 -12 348 l-5 342 -356 -440 c-195 -242 -382 -473 -414 -514
+l-59 -73 -3 -1197 c-2 -658 -5 -1215 -6 -1238 -1 -24 0 -43 3 -42 3 0 118 140
+256 312 138 172 754 933 1368 1692 l1117 1380 -371 3 c-203 1 -371 3 -371 5
+-1 1 -7 182 -13 402 l-11 400 -101 -125z"/>
+<path d="M3668 3033 l-197 -3 4 -633 c3 -347 8 -783 11 -967 3 -184 5 -343 5
+-354 0 -10 3 -15 7 -11 4 3 250 313 548 688 l541 682 -319 5 -319 5 112 145
+c62 80 166 214 231 298 l118 152 -272 -2 c-150 -2 -362 -4 -470 -5z"/>
+<path d="M2778 2163 c-109 -130 -196 -239 -193 -241 2 -2 92 -1 199 3 l196 8
+0 233 c0 129 -1 234 -3 234 -1 0 -91 -107 -199 -237z"/>
+<path d="M2055 1253 c-93 -114 -171 -209 -173 -212 -1 -3 243 -5 543 -3 l544
+2 3 210 3 210 -375 -1 -375 0 -170 -206z"/>
+</g>
+
+#Breck Logo
+<g transform="translate(248.000000,110.000000) scale(0.05000,-0.05000)"
+fill="#000000" stroke="none">
+<path d="M1275 2030 c-22 -5 -58 -15 -80 -23 -37 -13 -40 -17 -43 -55 l-3 -41
+33 6 c152 24 257 -143 203 -322 -23 -79 -80 -149 -221 -271 -120 -103 -134
+-119 -134 -148 l0 -32 86 -11 c263 -36 395 -210 364 -481 -12 -103 -25 -153
+-60 -222 -60 -119 -182 -220 -317 -262 -57 -18 -73 -27 -73 -41 0 -18 5 -19
+58 -13 254 30 496 184 647 411 94 141 135 268 135 416 0 238 -140 403 -398
+469 l-43 11 59 64 c111 118 157 266 122 392 -35 123 -173 186 -335 153z"/>
+<path d="M160 1984 c0 -26 9 -46 30 -70 61 -70 60 -55 60 -971 l0 -833 165 0
+165 0 0 728 c-1 726 -1 727 -23 793 -57 167 -200 314 -370 378 -26 10 -27 10
+-27 -25z"/>
+<path d="M1008 1940 c-98 -42 -202 -112 -248 -167 -50 -60 -99 -170 -110 -248
+-7 -44 -9 -315 -8 -740 l3 -670 167 -3 168 -2 2 812 c3 915 -3 844 80 932 34
+35 39 45 36 82 l-3 42 -87 -38z"/>
+</g>
+
+</svg>
+
+

@@ -1,10 +1,1 @@
-Code for backend of kindle weather display running on debian. 
-
-
-Depends:
-Python
-BeautifulSoup (python)
-Curl
-Imagemagick
-pngcrush
-apache2 (and subdir /weather)
+Code for backend of kindle weather display running on raspi. 

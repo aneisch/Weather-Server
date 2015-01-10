@@ -1,64 +1,73 @@
 #!/bin/sh
+cd ~/weather_server/
 
 #Breckenridge
 #80424
-curl -connect-timeout 10 --silent "http://xml.weather.yahoo.com/forecastrss?p=80424&u=f" | grep -E '(Current Conditions:|F<BR)' | sed -e 's/Current Conditions://' -e 's/<br \/>//' -e 's/<b>//' -e 's/<\/b>//' -e 's/<BR \/>//' -e 's/<description>//' -e 's/<\/description>//' -e 's/Partly Cloudy\/Windy, //' -e 's/Heavy Thunderstorm, //' -e 's/Thunder in the Vicinity, //' -e 's/Fair, //' -e 's/Wintry Mix, //' -e 's/Fair\/Windy, //' -e 's/Cloudy\/Windy, //' -e 's/Mostly Cloudy, //' -e 's/Light Freezing Rain, //'  -e 's/Partly Cloudy, //' -e 's/Cloudy, //' -e 's/.$//' -e 's/.$//' -e 's/Tornado, //' -e 's/Tropical Storm, //' -e 's/Hurricane, //' -e 's/Severe Thunderstorms, //' -e 's/Thunderstorms, //' -e 's/Mixed Rain and Snow, //' -e 's/Rain and Sleet, //' -e 's/Mixed Rain and Sleet, //' -e 's/Mixed Snow and Sleet, //' -e 's/Freezing Drizzle, //' -e 's/Drizzle, //' -e 's/Rain, //' -e 's/Freezing Rain, //' -e 's/Showers, //' -e 's/Snow Flurries, //' -e 's/Light Rain, //' -e 's/Light Snow, //' -e 's/Light Snow Showers, //' -e 's/Blowing Snow, //' -e 's/Light //' -e 's/Snow, //' -e 's/Hail, //' -e 's/Sleet, //' -e 's/Dust, //' -e 's/Foggy, //' -e 's/Fog, //' -e 's/Haze, //' -e 's/Smoky, //' -e 's/Blustery, //' -e 's/Windy, //' -e 's/Cold, //' -e 's/Clear, //' -e 's/Sunny, //' -e 's/Mixed Rain and Hail, //' -e 's/Hot, //' -e 's/Isolated Thunderstorms, //' -e 's/Scattered Thunderstorms, //' -e 's/Scattered Showers, //' -e 's/Heavy Snow, //' -e 's/Scattered Snow Showers, //' -e 's/Heavy Snow, //' -e 's/Thundershowers, //' -e 's/Snow Showers, //' -e 's/Isolated Thundershowers, //' -e 's/Not Available, //' | python ~/weather_server/weather-script-breckenridge.py
-convert ~/weather_server/weather-script-output.svg ~/weather_server/weather-script-output-new.png 
-convert ~/weather_server/weather-script-output-new.png -resize 600x800 ~/weather_server/weather-script-output-new.png
-pngcrush -c 0 -nofilecheck ~/weather_server/weather-script-output-new.png ~/weather_server/weather-script-breckoutput.png
-mv ~/weather_server/weather-script-breckoutput.png ~/weather_server/breckenridge.png
-sudo mv ~/weather_server/breckenridge.png /var/www/weather
+curl -connect-timeout 10 --silent "http://xml.weather.yahoo.com/forecastrss?p=80424&u=f" | grep -E '(Current Conditions:|F<BR)' | sed -e 's/Current Conditions://' -e 's/Mostly Cloudy\/Windy,//' -e 's/<br \/>//' -e 's/<b>//' -e 's/<\/b>//' -e 's/<BR \/>//' -e 's/<description>//' -e 's/<\/description>//' -e 's/Partly Cloudy\/Windy, //' -e 's/Heavy Thunderstorm, //' -e 's/Thunder in the Vicinity, //' -e 's/Fair, //' -e 's/Wintry Mix, //' -e 's/Fair\/Windy, //' -e 's/Cloudy\/Windy, //' -e 's/Mostly Cloudy, //' -e 's/Light Freezing Rain, //'  -e 's/Partly Cloudy, //' -e 's/Cloudy, //' -e 's/.$//' -e 's/.$//' -e 's/Tornado, //' -e 's/Tropical Storm, //' -e 's/Hurricane, //' -e 's/Severe Thunderstorms, //' -e 's/Thunderstorms, //' -e 's/Mixed Rain and Snow, //' -e 's/Rain and Sleet, //' -e 's/Mixed Rain and Sleet, //' -e 's/Mixed Snow and Sleet, //' -e 's/Freezing Drizzle, //' -e 's/Drizzle, //' -e 's/Rain, //' -e 's/Freezing Rain, //' -e 's/Showers, //' -e 's/Snow Flurries, //' -e 's/Light Rain, //' -e 's/Light Snow, //' -e 's/Light Snow Showers, //' -e 's/Blowing Snow, //' -e 's/Light //' -e 's/Snow, //' -e 's/Hail, //' -e 's/Sleet, //' -e 's/Dust, //' -e 's/Foggy, //' -e 's/Fog, //' -e 's/Haze, //' -e 's/Smoky, //' -e 's/Blustery, //' -e 's/Windy, //' -e 's/Cold, //' -e 's/Clear, //' -e 's/Sunny, //' -e 's/Mixed Rain and Hail, //' -e 's/Hot, //' -e 's/Isolated Thunderstorms, //' -e 's/Scattered Thunderstorms, //' -e 's/Scattered Showers, //' -e 's/Heavy Snow, //' -e 's/Scattered Snow Showers, //' -e 's/Heavy Snow, //' -e 's/Thundershowers, //' -e 's/Snow Showers, //' -e 's/Isolated Thundershowers, //' -e 's/Not Available, //' | python weather-script-breckenridge.py
+convert weather-script-output.svg weather-script-output-new.png 
+convert weather-script-output-new.png -resize 600x800 weather-script-output-new.png
+pngcrush -c 0 -nofilecheck weather-script-output-new.png weather-script-breckoutput.png
+mv weather-script-breckoutput.png breckenridge.png
+sudo mv breckenridge.png /var/www/weather
 
 #Snow Stake
-cd ~/weather_server/
-wget http://opensnow.com/webcams/current/607.jpg -O ~/weather_server/607.jpg
-wget http://opensnow.com/webcams/current/613.jpg -O ~/weather_server/612.jpg
+wget http://opensnow.com/webcams/current/607.jpg -O 607.jpg
+wget http://opensnow.com/webcams/current/613.jpg -O 612.jpg
 FILEDATE=$(date)
-convert -gravity south 612.jpg -fill black -annotate +0+0 "$FILEDATE" 613.jpg
-convert ~/weather_server/607.jpg -resize 600x400\! ~/weather_server/607sm.jpg
-convert ~/weather_server/613.jpg -resize 600x400\! ~/weather_server/613sm.jpg
-convert -gravity south ~/weather_server/613sm.jpg -pointsize 20 -fill black -annotate +0+15 '5am' ~/weather_server/613ann.jpg
-convert -gravity south ~/weather_server/607sm.jpg -pointsize 20 -fill black -annotate +0+15 'Live' ~/weather_server/607ann.jpg
-convert ~/weather_server/607ann.jpg ~/weather_server/613ann.jpg -append ~/weather_server/snow.jpg
-convert ~/weather_server/snow.jpg -resize 600x800 ~/weather_server/snow1.png
-pngcrush -c 0 -nofilecheck ~/weather_server/snow1.png ~/weather_server/snow.png
-sudo mv ~/weather_server/snow.png /var/www/weather
-rm ~/weather_server/607sm.jpg
-rm ~/weather_server/607ann.jpg
-rm ~/weather_server/607.jpg
-rm ~/weather_server/613ann.jpg
-rm ~/weather_server/613sm.jpg
-rm ~/weather_server/613.jpg
-rm ~/weather_server/snow1.png
-rm ~/weather_server/snow.jpg
-rm ~/weather_server/612.jpg
+convert -gravity south 612.jpg -fill white -annotate +0+0 "$FILEDATE" 613.jpg
+convert 607.jpg -resize 600x400\! 607sm.jpg
+convert 613.jpg -resize 600x400\! 613sm.jpg
+convert -gravity south 613sm.jpg -pointsize 20 -fill black -annotate +0+15 '5am' 613ann.jpg
+convert -gravity south 607sm.jpg -pointsize 20 -fill black -annotate +0+15 'Live' 607ann.jpg
+convert 607ann.jpg 613ann.jpg -append snow.jpg
+convert snow.jpg -resize 600x800 snow1.png
+pngcrush -c 0 -nofilecheck snow1.png snow.png
+sudo mv snow.png /var/www/weather
+rm 607sm.jpg
+rm 607ann.jpg
+rm 607.jpg
+rm 613ann.jpg
+rm 613sm.jpg
+rm 613.jpg
+rm snow1.png
+rm snow.jpg
+rm 612.jpg
+
+#Snow Report
+curl -connect-timeout 10 --silent "http://xml.weather.yahoo.com/forecastrss?p=80424&u=f" | grep -E '(Current Conditions:|F<BR)' | sed -e 's/Current Conditions://' -e 's/Mostly Cloudy\/Windy,//' -e 's/<br \/>//' -e 's/<b>//' -e 's/<\/b>//' -e 's/<BR \/>//' -e 's/<description>//' -e 's/<\/description>//' -e 's/Partly Cloudy\/Windy, //' -e 's/Heavy Thunderstorm, //' -e 's/Thunder in the Vicinity, //' -e 's/Fair, //' -e 's/Wintry Mix, //' -e 's/Fair\/Windy, //' -e 's/Cloudy\/Windy, //' -e 's/Mostly Cloudy, //' -e 's/Light Freezing Rain, //'  -e 's/Partly Cloudy, //' -e 's/Cloudy, //' -e 's/.$//' -e 's/.$//' -e 's/Tornado, //' -e 's/Tropical Storm, //' -e 's/Hurricane, //' -e 's/Severe Thunderstorms, //' -e 's/Thunderstorms, //' -e 's/Mixed Rain and Snow, //' -e 's/Rain and Sleet, //' -e 's/Mixed Rain and Sleet, //' -e 's/Mixed Snow and Sleet, //' -e 's/Freezing Drizzle, //' -e 's/Drizzle, //' -e 's/Rain, //' -e 's/Freezing Rain, //' -e 's/Showers, //' -e 's/Snow Flurries, //' -e 's/Light Rain, //' -e 's/Light Snow, //' -e 's/Light Snow Showers, //' -e 's/Blowing Snow, //' -e 's/Light //' -e 's/Snow, //' -e 's/Hail, //' -e 's/Sleet, //' -e 's/Dust, //' -e 's/Foggy, //' -e 's/Fog, //' -e 's/Haze, //' -e 's/Smoky, //' -e 's/Blustery, //' -e 's/Windy, //' -e 's/Cold, //' -e 's/Clear, //' -e 's/Sunny, //' -e 's/Mixed Rain and Hail, //' -e 's/Hot, //' -e 's/Isolated Thunderstorms, //' -e 's/Scattered Thunderstorms, //' -e 's/Scattered Showers, //' -e 's/Heavy Snow, //' -e 's/Scattered Snow Showers, //' -e 's/Heavy Snow, //' -e 's/Thundershowers, //' -e 's/Snow Showers, //' -e 's/Isolated Thundershowers, //' -e 's/Not Available, //' | python snow-script.py
+convert snow-script-output.svg snow-script-output-new.png 
+convert snow-script-output-new.png -resize 600x800 snow-script-output-new.png
+pngcrush -c 0 -nofilecheck snow-script-output-new.png snow-script.png
+sudo mv snow-script.png /var/www/weather/snow-report.png
+rm snow-script-output-new.png
+rm snow-script-output.svg
 
 #College Station
 #77840
-curl --connect-timeout 10 --silent "http://xml.weather.yahoo.com/forecastrss?p=77840&u=f" | grep -E '(Current Conditions:|F<BR)' | sed -e 's/Current Conditions://' -e 's/<br \/>//' -e 's/<b>//' -e 's/Thunderstorm,//' -e 's/<\/b>//' -e 's/<BR \/>//' -e 's/<description>//' -e 's/<\/description>//' -e 's/Partly Cloudy\/Windy, //' -e 's/Light Rain with Thunder, //' -e 's/Partly Cloudy\/Windy, //' -e 's/Thunder in the Vicinity, //' -e 's/Fair, //' -e 's/Wintry Mix, //' -e 's/Fair\/Windy, //' -e 's/Cloudy\/Windy, //' -e 's/Mostly Cloudy, //' -e 's/Light Freezing Rain, //'  -e 's/Partly Cloudy, //' -e 's/Cloudy, //' -e 's/.$//' -e 's/.$//' -e 's/Tornado, //' -e 's/Tropical Storm, //' -e 's/Hurricane, //' -e 's/Severe Thunderstorms, //' -e 's/Thunderstorms, //' -e 's/Mixed Rain and Snow, //' -e 's/Rain and Sleet, //' -e 's/Mixed Rain and Sleet, //' -e 's/Mixed Snow and Sleet, //' -e 's/Freezing Drizzle, //' -e 's/Drizzle, //' -e 's/Rain, //' -e 's/Freezing Rain, //' -e 's/Showers, //' -e 's/Snow Flurries, //' -e 's/Light Rain, //' -e 's/Light Snow, //' -e 's/Light Snow Showers, //' -e 's/Blowing Snow, //' -e 's/Light //' -e 's/Snow, //' -e 's/Hail, //' -e 's/Sleet, //' -e 's/Dust, //' -e 's/Foggy, //' -e 's/Fog, //' -e 's/Haze, //' -e 's/Smoky, //' -e 's/Blustery, //' -e 's/Windy, //' -e 's/Cold, //' -e 's/Clear, //' -e 's/Sunny, //' -e 's/Mixed Rain and Hail, //' -e 's/Hot, //' -e 's/Isolated Thunderstorms, //' -e 's/Scattered Thunderstorms, //' -e 's/Scattered Showers, //' -e 's/Heavy Snow, //' -e 's/Scattered Snow Showers, //' -e 's/Heavy Snow, //' -e 's/Thundershowers, //' -e 's/Snow Showers, //' -e 's/Isolated Thundershowers, //' -e 's/Not Available, //' -e 's/Thunder, //' | python ~/weather_server/weather-script-college-station.py
-convert ~/weather_server/weather-script-output.svg ~/weather_server/weather-script-output-new.png 
-convert ~/weather_server/weather-script-output-new.png -resize 600x800 ~/weather_server/weather-script-output-new.png
-pngcrush -c 0 -nofilecheck ~/weather_server/weather-script-output-new.png ~/weather_server/weather-script-csoutput.png
-mv ~/weather_server/weather-script-csoutput.png ~/weather_server/college-station.png
-sudo mv ~/weather_server/college-station.png /var/www/weather/
+curl --connect-timeout 10 --silent "http://xml.weather.yahoo.com/forecastrss?p=77840&u=f" | grep -E '(Current Conditions:|F<BR)' | sed -e 's/Current Conditions://' -e 's/<br \/>//' -e 's/<b>//' -e 's/Thunderstorm,//' -e 's/<\/b>//' -e 's/<BR \/>//' -e 's/<description>//' -e 's/<\/description>//' -e 's/Partly Cloudy\/Windy, //' -e 's/Light Rain with Thunder, //' -e 's/Partly Cloudy\/Windy, //' -e 's/Thunder in the Vicinity, //' -e 's/Fair, //' -e 's/Wintry Mix, //' -e 's/Fair\/Windy, //' -e 's/Cloudy\/Windy, //' -e 's/Mostly Cloudy, //' -e 's/Light Freezing Rain, //'  -e 's/Partly Cloudy, //' -e 's/Cloudy, //' -e 's/.$//' -e 's/.$//' -e 's/Tornado, //' -e 's/Tropical Storm, //' -e 's/Hurricane, //' -e 's/Severe Thunderstorms, //' -e 's/Thunderstorms, //' -e 's/Mixed Rain and Snow, //' -e 's/Rain and Sleet, //' -e 's/Mixed Rain and Sleet, //' -e 's/Mixed Snow and Sleet, //' -e 's/Freezing Drizzle, //' -e 's/Drizzle, //' -e 's/Rain, //' -e 's/Freezing Rain, //' -e 's/Showers, //' -e 's/Snow Flurries, //' -e 's/Light Rain, //' -e 's/Light Snow, //' -e 's/Light Snow Showers, //' -e 's/Blowing Snow, //' -e 's/Light //' -e 's/Snow, //' -e 's/Hail, //' -e 's/Sleet, //' -e 's/Dust, //' -e 's/Foggy, //' -e 's/Fog, //' -e 's/Haze, //' -e 's/Smoky, //' -e 's/Blustery, //' -e 's/Windy, //' -e 's/Cold, //' -e 's/Clear, //' -e 's/Sunny, //' -e 's/Mixed Rain and Hail, //' -e 's/Hot, //' -e 's/Isolated Thunderstorms, //' -e 's/Scattered Thunderstorms, //' -e 's/Scattered Showers, //' -e 's/Heavy Snow, //' -e 's/Scattered Snow Showers, //' -e 's/Heavy Snow, //' -e 's/Thundershowers, //' -e 's/Snow Showers, //' -e 's/Isolated Thundershowers, //' -e 's/Not Available, //' -e 's/Thunder, //' | python weather-script-college-station.py
+convert weather-script-output.svg weather-script-output-new.png 
+convert weather-script-output-new.png -resize 600x800 weather-script-output-new.png
+pngcrush -c 0 -nofilecheck weather-script-output-new.png weather-script-csoutput.png
+mv weather-script-csoutput.png college-station.png
+sudo mv college-station.png /var/www/weather/
 
 #Radar
-wget http://radblast.wunderground.com/cgi-bin/radar/WUNIDS_composite?centerlat=30.58\&centerlon=-96.37\&radius=97\&type=N1R\&frame=0\&num=0\&delay=0\&width=600\&height=800\&newmaps=1\&r=1265658117.gif -O ~/weather_server/cs-radar.gif
-convert ~/weather_server/cs-radar.gif -resize 600x800  ~/weather_server/cs-radar.png
-pngcrush -c 0 -nofilecheck ~/weather_server/cs-radar.png ~/weather_server/college-station-radar.png
-sudo mv ~/weather_server/college-station-radar.png /var/www/weather/
-rm ~/weather_server/cs-radar.png
-rm ~/weather_server/cs-radar.gif
+wget http://radblast.wunderground.com/cgi-bin/radar/WUNIDS_composite?centerlat=30.58\&centerlon=-96.37\&radius=97\&type=N1R\&frame=0\&num=0\&delay=0\&width=600\&height=800\&newmaps=1\&r=1265658117.gif -O cs-radar.gif
+convert cs-radar.gif -resize 600x800  cs-radar.png
+pngcrush -c 0 -nofilecheck cs-radar.png college-station-radar.png
+sudo mv college-station-radar.png /var/www/weather/
+rm cs-radar.png
+rm cs-radar.gif
 
 #Cypress
 #77429
-curl --connect-timeout 10 --silent "http://xml.weather.yahoo.com/forecastrss?p=77429&u=f" | grep -E '(Current Conditions:|F<BR)' | sed -e 's/Current Conditions://' -e 's/<br \/>//' -e 's/<b>//' -e 's/<\/b>//' -e 's/<BR \/>//' -e 's/<description>//' -e 's/<\/description>//' -e 's/Partly Cloudy\/Windy, //' -e 's/Heavy Thunderstorm, //' -e 's/Thunder in the Vicinity, //' -e 's/Fair, //' -e 's/Wintry Mix, //' -e 's/Fair\/Windy, //' -e 's/Cloudy\/Windy, //' -e 's/Mostly Cloudy, //'  -e 's/Light Freezing Rain, //' -e 's/Partly Cloudy, //' -e 's/Cloudy, //' -e 's/.$//' -e 's/.$//' -e 's/Tornado, //' -e 's/Tropical Storm, //' -e 's/Hurricane, //' -e 's/Severe Thunderstorms, //' -e 's/Thunderstorms, //' -e 's/Mixed Rain and Snow, //' -e 's/Rain and Sleet, //' -e 's/Mixed Rain and Sleet, //' -e 's/Mixed Snow and Sleet, //' -e 's/Freezing Drizzle, //' -e 's/Drizzle, //' -e 's/Rain, //' -e 's/Freezing Rain, //' -e 's/Showers, //' -e 's/Snow Flurries, //' -e 's/Light Rain, //' -e 's/Light Snow, //' -e 's/Light Snow Showers, //' -e 's/Blowing Snow, //' -e 's/Light //' -e 's/Snow, //' -e 's/Hail, //' -e 's/Sleet, //' -e 's/Dust, //' -e 's/Foggy, //' -e 's/Fog, //' -e 's/Haze, //' -e 's/Smoky, //' -e 's/Blustery, //' -e 's/Windy, //' -e 's/Cold, //' -e 's/Clear, //' -e 's/Sunny, //' -e 's/Mixed Rain and Hail, //' -e 's/Hot, //' -e 's/Isolated Thunderstorms, //' -e 's/Scattered Thunderstorms, //' -e 's/Scattered Showers, //' -e 's/Heavy Snow, //' -e 's/Scattered Snow Showers, //' -e 's/Heavy Snow, //' -e 's/Thundershowers, //' -e 's/Snow Showers, //' -e 's/Isolated Thundershowers, //' -e 's/Not Available, //' | python ~/weather_server/weather-script-cypress.py
-convert ~/weather_server/weather-script-output.svg ~/weather_server/weather-script-output-new.png 
-convert ~/weather_server/weather-script-output-new.png -resize 600x800 ~/weather_server/weather-script-output-new.png
-pngcrush -c 0 -nofilecheck ~/weather_server/weather-script-output-new.png ~/weather_server/weather-script-cypoutput.png
-mv ~/weather_server/weather-script-cypoutput.png ~/weather_server/cypress.png
-sudo mv ~/weather_server/cypress.png /var/www/weather
+curl --connect-timeout 10 --silent "http://xml.weather.yahoo.com/forecastrss?p=77429&u=f" | grep -E '(Current Conditions:|F<BR)' | sed -e 's/Current Conditions://' -e 's/<br \/>//' -e 's/<b>//' -e 's/<\/b>//' -e 's/<BR \/>//' -e 's/<description>//' -e 's/<\/description>//' -e 's/Partly Cloudy\/Windy, //' -e 's/Heavy Thunderstorm, //' -e 's/Thunder in the Vicinity, //' -e 's/Fair, //' -e 's/Wintry Mix, //' -e 's/Fair\/Windy, //' -e 's/Cloudy\/Windy, //' -e 's/Mostly Cloudy, //'  -e 's/Light Freezing Rain, //' -e 's/Partly Cloudy, //' -e 's/Cloudy, //' -e 's/.$//' -e 's/.$//' -e 's/Tornado, //' -e 's/Tropical Storm, //' -e 's/Hurricane, //' -e 's/Severe Thunderstorms, //' -e 's/Thunderstorms, //' -e 's/Mixed Rain and Snow, //' -e 's/Rain and Sleet, //' -e 's/Mixed Rain and Sleet, //' -e 's/Mixed Snow and Sleet, //' -e 's/Freezing Drizzle, //' -e 's/Drizzle, //' -e 's/Rain, //' -e 's/Freezing Rain, //' -e 's/Showers, //' -e 's/Snow Flurries, //' -e 's/Light Rain, //' -e 's/Light Snow, //' -e 's/Light Snow Showers, //' -e 's/Blowing Snow, //' -e 's/Light //' -e 's/Snow, //' -e 's/Hail, //' -e 's/Sleet, //' -e 's/Dust, //' -e 's/Foggy, //' -e 's/Fog, //' -e 's/Haze, //' -e 's/Smoky, //' -e 's/Blustery, //' -e 's/Windy, //' -e 's/Cold, //' -e 's/Clear, //' -e 's/Sunny, //' -e 's/Mixed Rain and Hail, //' -e 's/Hot, //' -e 's/Isolated Thunderstorms, //' -e 's/Scattered Thunderstorms, //' -e 's/Scattered Showers, //' -e 's/Heavy Snow, //' -e 's/Scattered Snow Showers, //' -e 's/Heavy Snow, //' -e 's/Thundershowers, //' -e 's/Snow Showers, //' -e 's/Isolated Thundershowers, //' -e 's/Not Available, //' | python weather-script-cypress.py
+convert weather-script-output.svg weather-script-output-new.png 
+convert weather-script-output-new.png -resize 600x800 weather-script-output-new.png
+pngcrush -c 0 -nofilecheck weather-script-output-new.png weather-script-cypoutput.png
+mv weather-script-cypoutput.png cypress.png
+sudo mv cypress.png /var/www/weather
 
 #Clean Up
-rm ~/weather_server/weather-script-output-new.png 
-rm ~/weather_server/weather-script-output.svg 
+rm weather-script-output-new.png 
+rm weather-script-output.svg 

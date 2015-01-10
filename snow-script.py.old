@@ -1,0 +1,370 @@
+#!/usr/bin/python2
+
+# Kindle Snow Report
+# November 2014
+
+import datetime
+import socket
+import codecs
+from os.path import expanduser
+home = expanduser("~")
+hostname = (socket.gethostname())
+from BeautifulSoup import BeautifulSoup 
+import urllib2
+import sys
+
+for line in sys.stdin:
+    current = line
+    
+# Open SVG to process
+output = codecs.open(home+'/weather_server/snow-script-preprocess.svg', 'r', encoding='utf-8').read()
+
+
+now = datetime.datetime.now()
+dtyear=str(now.year)
+dtmonth=str(now.month)
+dtday=str(now.day)
+dthour=str(((now.hour + 11) % 12) + 1)
+
+#fix for minute less than 10
+if now.minute < 10:
+    dtmin = "0" + str(now.minute)
+if now.minute >= 10:
+    dtmin = str(now.minute)
+
+#AM or PM
+if now.hour >= 12:
+    suffix = " PM"
+if now.hour < 12:
+    suffix = " AM"
+
+dtnow=str(dtmonth+'/'+dtday+'/'+dtyear+' '+dthour+':'+dtmin+suffix + ' via ' + hostname)
+
+
+snow_toggle = False
+base_toggle = False
+lifts_toggle = False
+trails_toggle = False
+conditions_toggle = False
+acres_toggle = False
+previous = ''
+keystone_snow = "n/a"
+keystone_base = "n/a"
+keystone_conditions = "n/a"
+keystone_long = ""
+keystone_lifts = "n/a"
+keystone_trails = "n/a"
+keystone_acres = "n/a"
+keystone_current = "n/a"
+breck_snow = "n/a"
+breck_base = "n/a"
+breck_conditions = "n/a"
+breck_long = ""
+breck_lifts = "n/a"
+breck_trails = "n/a"
+breck_acres = "n/a"
+breck_current = "n/a"
+abasin_snow = "n/a"
+abasin_base = "n/a"
+abasin_conditions = "n/a"
+abasin_long = ""
+abasin_lifts = "n/a"
+abasin_trails = "n/a"
+abasin_acres = "n/a"
+abasin_current = "n/a"
+report_status = ""
+
+#Get opensnow values
+
+
+def get_values(url):
+    html = urllib2.urlopen(url).read()
+    soup = BeautifulSoup(html)
+    
+    try:
+        initial = str(soup.findAll('div', attrs={'class':'col-sm-6'}))
+    except:
+        pass
+    processed = initial.split("\n")
+    for line in processed:
+        if snow_toggle == True and "New Snow" in previous:
+            if "error" in line:
+                breck_snow = ""
+                snow_toggle = False
+                report_status = "No Report"
+            else:
+                breck_snow = line.strip("<div class=\"snow-report-value\">").strip("&rdquo;</div>") + "\""
+                snow_toggle = False
+        if base_toggle == True and "Base Depth" in previous:
+            if "error" in line:
+                breck_base = ""
+                base_toggle = False
+            else:
+                breck_base = line.strip("<div class=\"snow-report-value\">").strip("&rdquo;</div>") + "\""
+                base_toggle = False
+        if conditions_toggle == True and "Conditions" in previous:
+            if "error" in line:
+                breck_conditions = ""
+                conditions_toggle = False
+            else:
+                breck_conditions = line.replace("<div class=\"snow-report-value\">","").replace("&rdquo;</div>","").replace("</div>","")
+                conditions_toggle = False
+        if lifts_toggle == True and "Lifts" in previous:
+            if "error" in line:
+                breck_lifts = ""
+                lifts_toggle = False
+            else:
+                breck_lifts = line.strip("<div class=\"snow-report-value\">").strip("&rdquo;</div>")
+                lifts_toggle = False
+        if trails_toggle == True and "Trails Open" in previous:
+            if "error" in line:
+                breck_trails = ""
+                trails_toggle = False
+            else:
+                breck_trails = line.strip("<div class=\"snow-report-value\">").strip("&rdquo;</div>")
+                trails_toggle = False
+        if acres_toggle == True and "Acres Open" in previous:
+            if "error" in line:
+                breck_acres = ""
+                acres_toggle = False
+            else:
+                breck_acres = line.strip("<div class=\"snow-report-value\">").strip("&rdquo;</div>")
+                acres_toggle = False
+            
+        if "New Snow" in line:
+            previous = line
+            snow_toggle = True
+        if "Base Depth" in line:
+            previous = line
+            base_toggle = True
+        if "Conditions" in line:
+            previous = line
+            conditions_toggle = True
+        if "Lifts Open" in line:
+            previous = line
+            lifts_toggle = True
+        if "Trails Open" in line:
+            previous = line
+            trails_toggle = True
+        if "Acres Open" in line:
+            previous = line
+            acres_toggle = True
+
+
+
+
+###
+#Breckenridge
+
+
+breck_current = current + "F"
+if len(breck_conditions) > 6:
+    breck_long = breck_conditions
+    breck_conditions = ''
+    
+
+###
+#Keystone
+html = urllib2.urlopen('http://opensnow.com/location/keystone').read()
+soup = BeautifulSoup(html)
+
+try:
+    initial = str(soup.findAll('div', attrs={'class':'col-sm-6'}))
+except:
+    pass
+
+processed = initial.split("\n")
+
+for line in processed:
+    if snow_toggle == True and "New Snow" in previous:
+	if "error" in line:
+    	    keystone_snow = ""
+	    snow_toggle = False
+        else:
+            keystone_snow = line.strip("<div class=\"snow-report-value\">").strip("&rdquo;</div>") + "\""
+    	    snow_toggle = False
+    if base_toggle == True and "Base Depth" in previous:
+        if "error" in line:
+    	    keystone_base = ""
+	    base_toggle = False
+        else:
+            keystone_base = line.strip("<div class=\"snow-report-value\">").strip("&rdquo;</div>") + "\""
+            base_toggle = False
+    if conditions_toggle == True and "Conditions" in previous:
+    	if "error" in line:
+    	    keystone_conditions = ""
+	    conditions_toggle = False
+        else:
+            keystone_conditions = line.replace("<div class=\"snow-report-value\">","").replace("&rdquo;</div>","").replace("</div>","")
+            conditions_toggle = False
+    if lifts_toggle == True and "Lifts" in previous:
+        if "error" in line:
+    	    keystone_lifts = ""
+	    lifts_toggle = False
+        else:
+            keystone_lifts = line.strip("<div class=\"snow-report-value\">").strip("&rdquo;</div>")
+            lifts_toggle = False
+    if trails_toggle == True and "Trails Open" in previous:
+    	if "error" in line:
+    	    keystone_trails = ""
+	    trails_toggle = False
+        else:
+            keystone_trails = line.strip("<div class=\"snow-report-value\">").strip("&rdquo;</div>")
+            trails_toggle = False
+    if acres_toggle == True and "Acres Open" in previous:
+    	if "error" in line:
+    	    keystone_acres = ""
+	    acres_toggle = False
+        else:
+            keystone_acres = line.strip("<div class=\"snow-report-value\">").strip("&rdquo;</div>")
+            acres_toggle = False
+        
+    if "New Snow" in line:
+        previous = line
+        snow_toggle = True
+    if "Base Depth" in line:
+        previous = line
+        base_toggle = True
+    if "Conditions" in line:
+        previous = line
+        conditions_toggle = True
+    if "Lifts Open" in line:
+        previous = line
+        lifts_toggle = True
+    if "Trails Open" in line:
+        previous = line
+        trails_toggle = True
+    if "Acres Open" in line:
+        previous = line
+        acres_toggle = True
+    if "current-text" in line:
+        current = line.replace("&deg;</div>","").replace("<div class=\"current-text\">","")
+        keystone_current = current + "F"
+
+if len(keystone_conditions) > 6:
+    keystone_long = keystone_conditions
+    keystone_conditions = ''
+
+
+###
+#abasin
+html = urllib2.urlopen('http://opensnow.com/location/arapahoebasin').read()
+soup = BeautifulSoup(html)
+
+try:
+    initial = str(soup.findAll('div', attrs={'class':'col-sm-6'}))
+except:
+    pass
+
+processed = initial.split("\n")
+for line in processed:
+    if snow_toggle == True and "New Snow" in previous:
+	if "error" in line:
+    	    abasin_snow = ""
+	    snow_toggle = False
+        else:
+            abasin_snow = line.strip("<div class=\"snow-report-value\">").strip("&rdquo;</div>") + "\""
+    	    snow_toggle = False
+    if base_toggle == True and "Base Depth" in previous:
+        if "error" in line:
+    	    abasin_base = ""
+	    base_toggle = False
+        else:
+            abasin_base = line.strip("<div class=\"snow-report-value\">").strip("&rdquo;</div>") + "\""
+            base_toggle = False
+    if conditions_toggle == True and "Conditions" in previous:
+    	if "error" in line:
+    	    abasin_conditions = ""
+	    conditions_toggle = False
+        else:
+            abasin_conditions = line.replace("<div class=\"snow-report-value\">","").replace("&rdquo;</div>","").replace("</div>","")
+            conditions_toggle = False
+    if lifts_toggle == True and "Lifts" in previous:
+        if "error" in line:
+    	    abasin_lifts = ""
+	    lifts_toggle = False
+        else:
+            abasin_lifts = line.strip("<div class=\"snow-report-value\">").strip("&rdquo;</div>")
+            lifts_toggle = False
+    if trails_toggle == True and "Trails Open" in previous:
+    	if "error" in line:
+    	    abasin_trails = ""
+	    trails_toggle = False
+        else:
+            abasin_trails = line.strip("<div class=\"snow-report-value\">").strip("&rdquo;</div>")
+            trails_toggle = False
+    if acres_toggle == True and "Acres Open" in previous:
+    	if "error" in line:
+    	    abasin_acres = ""
+	    acres_toggle = False
+        else:
+            abasin_acres = line.strip("<div class=\"snow-report-value\">").strip("&rdquo;</div>")
+            acres_toggle = False
+        
+    if "New Snow" in line:
+        previous = line
+        snow_toggle = True
+    if "Base Depth" in line:
+        previous = line
+        base_toggle = True
+    if "Conditions" in line:
+        previous = line
+        conditions_toggle = True
+    if "Lifts Open" in line:
+        previous = line
+        lifts_toggle = True
+    if "Trails Open" in line:
+        previous = line
+        trails_toggle = True
+    if "Acres Open" in line:
+        previous = line
+        acres_toggle = True
+    if "current-text" in line:
+        current = line.replace("&deg;</div>","").replace("<div class=\"current-text\">","")
+        abasin_current = current + "F"
+
+if len(abasin_conditions) > 6:
+    abasin_long = abasin_conditions
+    abasin_conditions = ''
+
+
+#print keystone_snow
+#print keystone_base
+#print keystone_conditions
+#print keystone_lifts
+#print keystone_trails
+#print keystone_acres
+#print keystone_current
+#print
+#print breck_snow
+#print breck_base
+#print breck_conditions
+#print breck_lifts
+#print breck_trails
+#print breck_acres
+#print breck_current
+#print
+#print abasin_snow
+#print abasin_base
+#print abasin_conditions
+#print abasin_lifts
+#print abasin_trails
+#print abasin_acres
+#print abasin_current
+
+
+if "error" in breck_current:
+    breck_current = "n/a"
+if "error" in keystone_current:
+    keystone_current = "n/a"
+if "error" in abasin_current:
+    abasin_current = "n/a"
+#Fill in SVG Values
+output = output.replace('DATE_VALPLACE',str(dtnow))
+output = output.replace('breck_snow',breck_snow).replace('report_status',report_status).replace('breck_current',breck_current).replace('breck_base',breck_base).replace('breck_conditions',breck_conditions).replace('breck_acres',breck_acres).replace('breck_trails',breck_trails).replace('breck_lifts',breck_lifts)
+output = output.replace('keystone_snow',keystone_snow).replace('keystone_current',keystone_current).replace('keystone_base',keystone_base).replace('keystone_conditions',keystone_conditions).replace('keystone_acres',keystone_acres).replace('keystone_trails',keystone_trails).replace('keystone_lifts',keystone_lifts)
+output = output.replace('abasin_snow',abasin_snow).replace('abasin_current',abasin_current).replace('abasin_base',abasin_base).replace('abasin_conditions',abasin_conditions).replace('abasin_acres',abasin_acres).replace('abasin_trails',abasin_trails).replace('abasin_lifts',abasin_lifts)
+output = output.replace('breck_long', breck_long).replace('keystone_long', keystone_long).replace('abasin_long', abasin_long)
+
+# Write output
+codecs.open(home+'/weather_server/snow-script-output.svg', 'w', encoding='utf-8').write(output)

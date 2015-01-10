@@ -69,6 +69,7 @@ day_one = datetime.datetime.strptime(xml_day_one, '%Y-%m-%d')
 #
 
 # Open SVG to process
+#output = codecs.open(home+'/weather_server/weather-script-breck-preprocess.svg', 'r', encoding='utf-8').read()
 output = codecs.open(home+'/weather_server/weather-script-breck-preprocess.svg', 'r', encoding='utf-8').read()
 
 now = datetime.datetime.now()
@@ -137,71 +138,69 @@ sunday = 1
 sundayn = 1
 
 counter = 0
-values = {}
+values = []
 
 html = urllib2.urlopen('http://opensnow.com/location/breckenridge').read()
-soup = BeautifulSoup(html) 
-a = soup.findAll('div', attrs={'class':'powdercast'})
+soup = BeautifulSoup(html)
 
+a = soup.findAll('div', attrs={'class':'single-forecast '})
+if a == []:
+    a = soup.findAll('div', attrs={'class':'single-forecast  with-extra-night '})
 b = str(a)
 
 c = b.split("\n")
 d = ""
 
 for line in c:
-    if "dow" in line or "val" in line:
-        d += line + "\n"
-        
+    if "dow" in line or "\"quote\"" in line:
+        d += line.strip(" ").strip("<span class=\"quote\">&quot;</span>").strip("<div class=\"dow\">").strip("</") + "\n"
+
 e = d.split("\n")
 
-for line in e:
-    counter += 1
-    if "Monday" in line:
-        monday = counter
-    elif "Mon<br />Night" in line:
-        mondayn = counter
-    elif "Tuesday" in line:
-        tuesday = counter
-    elif "Tue<br />Night" in line:
-        tuesdayn = counter
-    elif "Wednesday" in line:
-        wednesday = counter
-    elif "Wed<br />Night" in line:
-        wednesdayn = counter
-    elif "Thursday" in line:
-        thursday = counter
-    elif "Thu<br />Night" in line:
-        thursdayn = counter
-    elif "Friday" in line:
-        friday = counter
-    elif "Fri<br />Night" in line:
-        fridayn = counter
-    elif "Saturday" in line:
-        saturday = counter
-    elif "Sat<br />Night" in line:
-        saturdayn = counter
-    elif "Sunday" in line:
-        sunday = counter
-    elif "Sun<br />Night" in line:
-        sundayn = counter
-        
-    if counter %2 == 0:
-        values[counter] = line.strip("<div class=\"val\">").strip("&quot;</div>")
+fridayval = "0"
+fridaynval = "0"
+saturdaynval = "0"
+saturdayval = "0"
+sundayval = "0"
+sundaynval = "0"
+mondayval = "0"
+mondaynval = "0"
+tuesdayval = "0"
+tuesdaynval = "0"
+wednesdayval = "0"
+wednesdaynval = "0"
+thursdayval = "0"
+thursdaynval = "0"
 
-mondayval = values[monday+1]
-mondaynval = values[mondayn+1]
-tuesdayval = values[tuesday+1]
-tuesdaynval = values[tuesdayn+1]
-wednesdayval = values[wednesday+1]
-wednesdaynval = values[wednesdayn+1]
-thursdayval = values[thursday+1]
-thursdaynval = values[thursdayn+1]
-fridayval = values[friday+1]
-fridaynval = values[fridayn+1]
-saturdayval = values[saturday+1]
-saturdaynval = values[saturdayn+1]
-sundayval = values[sunday+1]
-sundaynval = values[sundayn+1]
+for item in e:
+    if item == "Fri":
+        position = e.index("Fri")
+        fridayval = e[position+1]
+        fridaynval = e[position+2]
+    if item == "Sat":
+        position = e.index("Sat")
+        saturdayval = e[position+1]
+        saturdaynval = e[position+2]
+    if item == "Sun":
+        position = e.index("Sun")
+        sundayval = e[position+1]
+        sundaynval = e[position+2]
+    if item == "Mon":
+        position = e.index("Mon")
+        mondayval = e[position+1]
+        mondaynval = e[position+2]
+    if item == "Tue":
+        position = e.index("Tue")
+        tuesdayval = e[position+1]
+        tuesdaynval = e[position+2]
+    if item == "Wed":
+        position = e.index("Wed")
+        wednesdayval = e[position+1]
+        wednesdaynval = e[position+2]
+    if item == "Thu":
+        position = e.index("Thu")
+        thursdayval = e[position+1]
+        thursdaynval = e[position+2]
 
 
 if (days_of_week[(day_one + 0*one_day).weekday()]) == 'Monday':
@@ -300,4 +299,5 @@ output = output.replace('SNOW_ONE',snow_one).replace('SNOW_NIGHT_ONE',snow_one_n
 
 
 # Write output
+#codecs.open(home+'/weather_server/weather-script-output.svg', 'w', encoding='utf-8').write(output)
 codecs.open(home+'/weather_server/weather-script-output.svg', 'w', encoding='utf-8').write(output)
